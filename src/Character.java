@@ -96,4 +96,7 @@ public class Character{
     public int getStrength() {
         return this.strength;
     }
+    public int getAgility() {
+        return this.agility;
+    }
 }
