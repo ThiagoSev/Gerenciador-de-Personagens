@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
-
-public class Archer {
+public class Archer implements RpgClass{
+    @Override
+    public int specialAttack(){
+        System.out.println("ataque de arco");
+        return 0;
+    }
 }
