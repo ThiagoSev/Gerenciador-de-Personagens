@@ -6,6 +6,7 @@ package com.mycompany.mavenproject1.gui;
 import com.mycompany.mavenproject1.RpgCharacter;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -48,9 +49,11 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         tfAgility = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        tfVitality = new javax.swing.JTextField();
-        btnSend = new javax.swing.JButton();
+        tfIntelligence = new javax.swing.JTextField();
+        btnSalvar = new javax.swing.JButton();
         btnTeste = new javax.swing.JButton();
+        tfVitality = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -78,7 +81,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.CardLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("personagem");
+        jLabel1.setText("cadastro de personagem");
 
         jLabel2.setText("Nome:");
 
@@ -95,7 +98,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Atributos");
 
-        jLabel5.setText("Você tem 7 pontos para gastar");
+        jLabel5.setText("Você tem 15 pontos para gastar");
 
         jLabel6.setText("Força:");
 
@@ -109,15 +112,15 @@ public class FrCreateCharacter extends javax.swing.JFrame {
 
         jLabel8.setText("Vitalidade");
 
-        btnSend.setText("Concluir");
-        btnSend.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSalvar.setText("Salvar");
+        btnSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSendMouseClicked(evt);
+                btnSalvarMouseClicked(evt);
             }
         });
-        btnSend.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSendActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
@@ -128,54 +131,66 @@ public class FrCreateCharacter extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setText("Inteligência");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbRpgClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfCharacterName, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnSalvar)
+                                .addGap(50, 50, 50)
+                                .addComponent(btnTeste))
+                            .addComponent(jLabel5)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(115, 115, 115))
+                                .addGap(47, 47, 47)
+                                .addComponent(tfStrength, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(tfStrength)
-                                .addGap(72, 72, 72)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(tfVitality, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(tfCharacterName, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(cbRpgClass, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfAgility, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSend, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(50, 50, 50)
-                        .addComponent(btnTeste)))
-                .addContainerGap(497, Short.MAX_VALUE))
+                                .addComponent(jLabel13)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfIntelligence, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfAgility, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                                    .addComponent(tfVitality))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jLabel1)))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(tfCharacterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfCharacterName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbRpgClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbRpgClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -183,20 +198,24 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfStrength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfVitality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfAgility, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfStrength, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSend)
+                    .addComponent(jLabel7)
+                    .addComponent(tfAgility, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfVitality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(tfIntelligence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
                     .addComponent(btnTeste))
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, "CharacterEditorCard");
@@ -271,7 +290,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(labelNameChar3))))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
             .addComponent(jScrollPane2)
         );
         jPanel3Layout.setVerticalGroup(
@@ -301,7 +320,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 725, Short.MAX_VALUE)
+            .addGap(0, 630, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,16 +396,29 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfStrengthActionPerformed
 
-    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSendActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
     ArrayList characters = new ArrayList();
-    private void btnSendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSendMouseClicked
+    private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
+        int intStrength = Integer.parseInt(tfStrength.getText());
+        int intAgility = Integer.parseInt(tfAgility.getText());
+        int intVitality = Integer.parseInt(tfVitality.getText());
+        int intIntelligence = Integer.parseInt(tfIntelligence.getText());
+        int totalPoints = intStrength + intVitality + intAgility + intIntelligence;
+        if (totalPoints >= 15) {
+            JOptionPane.showMessageDialog(this,
+                "Você distribuiu " + totalPoints + " pontos.\nO máximo permitido é 15!",
+                "Limite de Pontos Excedido",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         RpgCharacter tempchar = new RpgCharacter(tfCharacterName.getText(),
                                             cbRpgClass.getSelectedIndex(),
-                                            Integer.parseInt(tfStrength.getText()),
-                                            Integer.parseInt(tfAgility.getText()),
-                                            Integer.parseInt(tfVitality.getText()));
+                                            intStrength,
+                                            intAgility,
+                                            intVitality,
+                                            intIntelligence);
         characters.add(tempchar);
         String mana = Integer.toString(tempchar.getMana());
         String data[] = {tfCharacterName.getText(),
@@ -395,10 +427,10 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                         Integer.toString(tempchar.getMana()),
                         tfStrength.getText(),
                         tfAgility.getText(),
-                        tfVitality.getText()};
+                        tfIntelligence.getText()};
         DefaultTableModel tablemodel = (DefaultTableModel) jTable1.getModel();
         tablemodel.addRow(data);
-    }//GEN-LAST:event_btnSendMouseClicked
+    }//GEN-LAST:event_btnSalvarMouseClicked
 
     private void btnTesteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTesteMouseClicked
         // TODO add your handling code here:
@@ -412,13 +444,14 @@ public class FrCreateCharacter extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSend;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnTeste;
     private javax.swing.JComboBox<String> cbRpgClass;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -445,6 +478,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
     private javax.swing.JMenuItem miTeamEditorCard;
     private javax.swing.JTextField tfAgility;
     private javax.swing.JTextField tfCharacterName;
+    private javax.swing.JTextField tfIntelligence;
     private javax.swing.JTextField tfStrength;
     private javax.swing.JTextField tfVitality;
     // End of variables declaration//GEN-END:variables

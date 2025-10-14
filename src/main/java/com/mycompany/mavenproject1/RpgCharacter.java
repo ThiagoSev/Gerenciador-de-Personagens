@@ -13,8 +13,9 @@ public class RpgCharacter{
     private int strength;
     private int agility;
     private int vitality;
+    private int intelligence;
 
-    public RpgCharacter(String name, int tempRpgClass, int strength, int agility, int vitality){
+    public RpgCharacter(String name, int tempRpgClass, int strength, int agility, int vitality, int intelligence){
         this.name = name;
         switch(tempRpgClass){
             case 0:
