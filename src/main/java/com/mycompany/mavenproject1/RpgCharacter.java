@@ -60,6 +60,10 @@ public class RpgCharacter{
     public int specialAttack(){
         return rpgClass.specialAttack();
     }
+    public int deflect(){
+        //decide se o personagem consegue desviar
+        return rpgClass.specialAttack();
+    }
     public String getName() {
         return this.name;
     }
