@@ -1,4 +1,5 @@
 # Gerenciador de Personagens - Trabalho Final
+---
 
 ## 📚Informações Gerais
 **Período Letivo**: 2025/2.  
