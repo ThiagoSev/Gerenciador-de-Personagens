@@ -19,18 +19,24 @@ public class RpgCharacter{
         this.name = name;
         switch(tempRpgClass){
             case 0:
+                this.rpgClassName = "Warrior";
                 this.rpgClass = new Warrior();
                 this.stamina = 20+this.vitality;
+                this.defense = 5;
                 this.mana = 2;
                 break;
             case 1:
+                this.rpgClassName = "Archer";
                 this.rpgClass = new Archer();
                 this.stamina = 17+this.vitality;
+                this.defense = 4;
                 this.mana = 2;
                 break;
             case 2:
+                this.rpgClassName = "Mage";
                 this.rpgClass = new Mage();
                 this.stamina = 12+this.vitality;
+                this.defense = 3;
                 this.mana = 5;
                 break;
             default:
@@ -46,7 +52,7 @@ public class RpgCharacter{
         String defenserName = defenserCharacter.getName();
         String attackerName = attackerCharacter.getName();
         if(defenserCharacter.getDefense() > random.nextInt(6)+1){
-            System.out.println(defenserName + " stamina: "+ defenserCharacter.getStamina());
+            System.out.println("\n"+defenserName + " stamina: "+ defenserCharacter.getStamina());
             System.out.println(attackerName + " attacks "+ defenserName);
             int damageTaken = (attackerCharacter.getStrength() + 3)*(-1);
             defenserCharacter.setStamina(damageTaken);

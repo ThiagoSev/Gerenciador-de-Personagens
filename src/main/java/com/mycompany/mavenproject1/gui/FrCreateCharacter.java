@@ -6,8 +6,11 @@ package com.mycompany.mavenproject1.gui;
 import com.mycompany.mavenproject1.RpgCharacter;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.Random;
+
 
 /**
  *
@@ -22,6 +25,15 @@ public class FrCreateCharacter extends javax.swing.JFrame {
      */
     public FrCreateCharacter() {
         initComponents();
+        this.labelCharHP = new JLabel[]{labelChar1HP, labelChar2HP, labelChar3HP};
+        this.labelCharName = new JLabel[]{labelChar1Name, labelChar2Name, labelChar3Name};
+        this.labelCharImage = new JLabel[]{labelChar1Image, labelChar2Image, labelChar3Image};        
+        this.labelCharIcon = new JLabel[]{labelChar1Icon, labelChar2Icon, labelChar3Icon};        
+        this.labelEnemyHP = new JLabel[]{labelEnemy1HP, labelEnemy2HP, labelEnemy3HP};
+        this.labelEnemyName = new JLabel[]{labelEnemy1Name, labelEnemy2Name, labelEnemy3Name};
+        this.labelEnemyImage = new JLabel[]{labelEnemy1Image, labelEnemy2Image, labelEnemy3Image};
+        this.labelEnemyIcon = new JLabel[]{labelEnemy1Icon, labelEnemy2Icon, labelEnemy3Icon};
+        
     }
 
     /**
@@ -72,21 +84,28 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         labelChar1Name = new javax.swing.JLabel();
         labelChar2Name = new javax.swing.JLabel();
         labelChar3Name = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        labelChar1Icon = new javax.swing.JLabel();
+        labelChar2Icon = new javax.swing.JLabel();
+        labelChar3Icon = new javax.swing.JLabel();
         labelChar1HP = new javax.swing.JLabel();
         labelChar2HP = new javax.swing.JLabel();
         labelChar3HP = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        labelEnemy3Icon = new javax.swing.JLabel();
         labelEnemy1HP = new javax.swing.JLabel();
         labelEnemy2HP = new javax.swing.JLabel();
         labelEnemy3HP = new javax.swing.JLabel();
         labelEnemy1Name = new javax.swing.JLabel();
         labelEnemy2Name = new javax.swing.JLabel();
         labelEnemy3Name = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        labelEnemy1Icon = new javax.swing.JLabel();
+        labelEnemy2Icon = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        labelChar1Image = new javax.swing.JLabel();
+        labelChar2Image = new javax.swing.JLabel();
+        labelChar3Image = new javax.swing.JLabel();
+        labelEnemy1Image = new javax.swing.JLabel();
+        labelEnemy2Image = new javax.swing.JLabel();
+        labelEnemy3Image = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miCharacterEditorCard = new javax.swing.JMenuItem();
@@ -98,8 +117,9 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(630, 630));
+        setPreferredSize(new java.awt.Dimension(650, 680));
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(650, 650));
         jPanel1.setLayout(new java.awt.CardLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -197,7 +217,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(jLabel1)))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +256,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnTeste))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, "CharacterEditorCard");
@@ -311,7 +331,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(labelNameChar3))))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
             .addComponent(jScrollPane2)
         );
         jPanel3Layout.setVerticalGroup(
@@ -369,19 +389,13 @@ public class FrCreateCharacter extends javax.swing.JFrame {
 
         labelChar3Name.setText("nome3");
 
-        jLabel19.setText("<iconeClasse>");
-
-        jLabel20.setText("<iconeClasse>");
-
-        jLabel21.setText("<iconeClasse>");
+        labelChar1Icon.setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png")); // NOI18N
 
         labelChar1HP.setText("HP");
 
         labelChar2HP.setText("HP");
 
         labelChar3HP.setText("HP");
-
-        jLabel25.setText("<iconeClasse>");
 
         labelEnemy1HP.setText("HP");
 
@@ -395,108 +409,168 @@ public class FrCreateCharacter extends javax.swing.JFrame {
 
         labelEnemy3Name.setText("nome3");
 
-        jLabel32.setText("<iconeClasse>");
+        jButton1.setText("jButton1");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jLabel33.setText("<iconeClasse>");
+        labelChar1Image.setText("  ");
+
+        labelEnemy1Image.setText("  ");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(labelChar1Name)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel19))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(labelChar2Name)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel20))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(labelChar3Name)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel21)))
-                .addGap(43, 43, 43)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelChar3HP)
-                    .addComponent(labelChar2HP)
-                    .addComponent(labelChar1HP))
-                .addGap(103, 103, 103))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(labelEnemy1Name)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel32))
+                                .addComponent(btnCommonAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(btnClassAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(labelEnemy2Name)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel33))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(labelEnemy3Name)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel25)))
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelEnemy3HP)
-                            .addComponent(labelEnemy2HP)
-                            .addComponent(labelEnemy1HP)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnCommonAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(btnClassAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(jButton1)))
                         .addGap(56, 56, 56)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnBattleRun, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                            .addComponent(btnDeflect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                            .addComponent(btnDeflect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(labelEnemy1Name)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(labelEnemy1Icon))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(labelEnemy2Name)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(labelEnemy2Icon))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(labelEnemy3Name)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(labelEnemy3Icon)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelEnemy3HP, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(labelEnemy1HP)
+                                    .addComponent(labelEnemy2HP)))
+                            .addComponent(labelChar1Image, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelChar2Image, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelChar3Image, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(147, 147, 147)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addComponent(labelChar1Name)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(labelChar1Icon))
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addComponent(labelChar2Name)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(labelChar2Icon))
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addComponent(labelChar3Name)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(labelChar3Icon)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labelChar3HP)
+                                            .addComponent(labelChar2HP)
+                                            .addComponent(labelChar1HP)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(labelEnemy1Image, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelEnemy2Image, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelEnemy3Image, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelEnemy1Name)
-                    .addComponent(jLabel32)
-                    .addComponent(labelEnemy1HP))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelEnemy2Name)
-                    .addComponent(jLabel33)
-                    .addComponent(labelEnemy2HP))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelEnemy3Name)
-                    .addComponent(jLabel25)
-                    .addComponent(labelEnemy3HP))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelChar1Name)
-                    .addComponent(jLabel19)
-                    .addComponent(labelChar1HP))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelChar2Name)
-                    .addComponent(jLabel20)
-                    .addComponent(labelChar2HP))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelChar3Name)
-                    .addComponent(jLabel21)
-                    .addComponent(labelChar3HP))
-                .addGap(69, 69, 69)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelEnemy1Name)
+                            .addComponent(labelEnemy1Icon))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelEnemy2Name)
+                            .addComponent(labelEnemy2Icon))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelEnemy3Name)
+                            .addComponent(labelEnemy3Icon)))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelEnemy1Image, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelEnemy3Image))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(labelEnemy2Image, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(60, 60, 60)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(labelEnemy1HP)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelEnemy2HP)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelEnemy3HP)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(labelChar1Image, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelChar3Image))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(labelChar2Image, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelChar1Name)
+                            .addComponent(labelChar1Icon)
+                            .addComponent(labelChar1HP))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelChar2Name)
+                            .addComponent(labelChar2Icon)
+                            .addComponent(labelChar2HP))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelChar3Name)
+                            .addComponent(labelChar3Icon)
+                            .addComponent(labelChar3HP))
+                        .addGap(28, 28, 28)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnClassAttack, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                    .addComponent(btnClassAttack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCommonAttack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDeflect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(44, 44, 44)
-                .addComponent(btnBattleRun)
-                .addGap(19, 19, 19))
+                    .addComponent(btnDeflect, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBattleRun)
+                    .addComponent(jButton1))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, "BattleCard");
@@ -535,11 +609,11 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
         );
 
         pack();
@@ -571,7 +645,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarActionPerformed
-    ArrayList characters = new ArrayList();
+    ArrayList<RpgCharacter> characters = new ArrayList<RpgCharacter>();
     private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
         int intStrength = Integer.parseInt(tfStrength.getText());
         int intAgility = Integer.parseInt(tfAgility.getText());
@@ -615,46 +689,120 @@ public class FrCreateCharacter extends javax.swing.JFrame {
     private void btnCommonAttackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommonAttackActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCommonAttackActionPerformed
-
+    Random randomGenerator = new Random();
+    boolean playableCharacter = true;
+    RpgCharacter[] combatPlayerCharacters = new RpgCharacter[3];
+    RpgCharacter[] combatComputerCharacters = new RpgCharacter[3];
+    RpgCharacter[] playerTeam = new RpgCharacter[3];
+    RpgCharacter[] computerTeam = new RpgCharacter[3];
+    int currentCharacter=0;
+    JLabel[] labelCharName;
+    JLabel[] labelCharHP;
+    JLabel[] labelCharImage;
+    JLabel[] labelCharIcon;
+    JLabel[] labelEnemyName;
+    JLabel[] labelEnemyHP;
+    JLabel[] labelEnemyImage;   
+    JLabel[] labelEnemyIcon;
+    
+    private void updateTeaInBattle(){
+        if(currentCharacter==2){
+            playableCharacter = !playableCharacter;
+            currentCharacter=0;
+        }else{
+            currentCharacter++;
+        }
+        loadTeamInBattle(playerTeam,computerTeam);
+        currentCharacter();
+    }
     private void btnCommonAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCommonAttackMouseClicked
-        
+        combatPlayerCharacters[currentCharacter].commonAttack(playerTeam[currentCharacter], computerTeam[currentCharacter]);
+        updateTeaInBattle();
         // invoca a função "commonAttack" da classe "Character"
     }//GEN-LAST:event_btnCommonAttackMouseClicked
 
     private void btnClassAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClassAttackMouseClicked
+        combatPlayerCharacters[currentCharacter].specialAttack();
+        updateTeaInBattle();
         // invoca a função "specialAttack" da classe "Character"
     }//GEN-LAST:event_btnClassAttackMouseClicked
 
     private void btnDeflectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeflectMouseClicked
         // invoca a função "deflect" da classe "Character"
     }//GEN-LAST:event_btnDeflectMouseClicked
-    int[] attackOrder;
-    boolean[] playableCharacter;
-    int currentCharacter;
-    private void loadTeamInBattle(ArrayList<RpgCharacter> playerTeam, ArrayList<RpgCharacter> computerTeam){
-        labelChar1Name.setText(playerTeam.get(0).getName());
-        labelChar2Name.setText(playerTeam.get(1).getName());
-        labelChar3Name.setText(playerTeam.get(2).getName());
-        labelChar1HP.setText("HP: "+playerTeam.get(0).getStamina());
-        labelChar2HP.setText("HP: "+playerTeam.get(1).getStamina());
-        labelChar3HP.setText("HP: "+playerTeam.get(2).getStamina());
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        System.out.println("pagina sendo carregada...");
+        playerTeam[0] = new RpgCharacter("Primeiro",2,1,1,1,1);
+        playerTeam[1] = new RpgCharacter("Segundo",1,1,1,1,1);
+        playerTeam[2] = new RpgCharacter("Terceiro",1,1,1,1,1);
+        computerTeam[0] = new RpgCharacter("Quarto",2,1,1,1,1);
+        computerTeam[1] = new RpgCharacter("Quinto",2,1,1,1,1);
+        computerTeam[2] = new RpgCharacter("Sexto",0,1,1,1,1);
+        loadTeamInBattle(playerTeam,computerTeam);   
+    }//GEN-LAST:event_jButton1MouseClicked
+    
+    private void loadTeamInBattle(RpgCharacter[] playerTeam, RpgCharacter[] computerTeam){
+        for(int i =0;i<3;i++){
+            switch(playerTeam[i].getRpgClassName()){
+            case "Warrior":
+                labelCharImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBody.png"));
+                labelCharIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
+                break;
+            case "Archer":
+                labelCharImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBody.png"));
+                labelCharIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
+                break;
+            case "Mage":
+                labelCharImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBody.png"));
+                labelCharIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
+                break;    
+            default:
+                break;
+            }
+            labelCharName[i].setText(playerTeam[i].getName());
+            labelCharHP[i].setText("HP: "+playerTeam[i].getStamina());
+            combatPlayerCharacters[i] = playerTeam[i];
+        }
+        for(int i =0;i<3;i++){
+            switch(computerTeam[i].getRpgClassName()){
+            case "Warrior":
+                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBodyBack.png"));
+                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
+                break;
+            case "Archer":
+                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBodyBack.png"));
+                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
+                break;
+            case "Mage":
+                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBodyBack.png"));
+                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
+                break;    
+            default:
+                break;
+            }
+            labelEnemyName[i].setText(computerTeam[i].getName());
+            labelEnemyHP[i].setText("HP: "+computerTeam[i].getStamina());
+            combatComputerCharacters[i] = computerTeam[i];
+        }
         //recebe os dados da tela TeamLoader
         //cria um array com a ordem de ação dos personagens
         //carrega os dados no frontend
         currentCharacter();
     }
     private void currentCharacter(){
-        if(playableCharacter[currentCharacter]){
-            loadPlayerAttack();
+        if(playableCharacter){
+            loadPlayerAttack(combatPlayerCharacters[currentCharacter]);
         }else{
-            loadComputerAttack();
+            loadComputerAttack(combatComputerCharacters[currentCharacter]);
         }
-        if(currentCharacter!=5){
-            currentCharacter=0;
-        }else{
-            currentCharacter++;
-        }
-        currentCharacter();
+        
+        
+        
         //lê o array com a ordem de ação dos personagens
         //se o personagem for do jogador
             //chama a função "loadPlayerAttack", passando o atual personagem como parâmetro
@@ -663,7 +811,21 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         //modifica a variável que indica a posição do array
         //chama a função de novo
     }
-    private void loadPlayerAttack(){
+    private void loadPlayerAttack(RpgCharacter character){
+        switch(character.getRpgClassName()){
+            case "Warrior":
+                btnClassAttack.setText("Ataque de Espada");
+                break;
+            case "Archer":
+                btnClassAttack.setText("Ataque de Flecha");
+                break;
+            case "Mage":
+                btnClassAttack.setText("Ataque Mágico");
+                break;    
+            default:
+                break;
+        }
+        
         //lê o personagem que vai agir
         //verifica a classe
         //se for guerreiro
@@ -673,7 +835,19 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         //se for mago
             //atualiza o texto do botão "btnClassAttack" para "ataque mágico"
     }
-    private void loadComputerAttack(){
+    private void loadComputerAttack(RpgCharacter character){
+        int randomAction = randomGenerator.nextInt(1);
+        switch(randomAction){
+            case 0:
+                character.commonAttack(character, combatPlayerCharacters[currentCharacter]);
+                break;
+            case 1:
+                character.specialAttack();
+                break;
+            default:
+                break;
+        }
+        updateTeaInBattle();
         //lê o personagem que vai agir
         //seleciona aleatoriamente uma das funções "commonAttack", "specialAttack" ou "deflect"
     }
@@ -688,19 +862,14 @@ public class FrCreateCharacter extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnTeste;
     private javax.swing.JComboBox<String> cbRpgClass;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -718,16 +887,28 @@ public class FrCreateCharacter extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelChar1HP;
+    private javax.swing.JLabel labelChar1Icon;
+    private javax.swing.JLabel labelChar1Image;
     private javax.swing.JLabel labelChar1Name;
     private javax.swing.JLabel labelChar2HP;
+    private javax.swing.JLabel labelChar2Icon;
+    private javax.swing.JLabel labelChar2Image;
     private javax.swing.JLabel labelChar2Name;
     private javax.swing.JLabel labelChar3HP;
+    private javax.swing.JLabel labelChar3Icon;
+    private javax.swing.JLabel labelChar3Image;
     private javax.swing.JLabel labelChar3Name;
     private javax.swing.JLabel labelEnemy1HP;
+    private javax.swing.JLabel labelEnemy1Icon;
+    private javax.swing.JLabel labelEnemy1Image;
     private javax.swing.JLabel labelEnemy1Name;
     private javax.swing.JLabel labelEnemy2HP;
+    private javax.swing.JLabel labelEnemy2Icon;
+    private javax.swing.JLabel labelEnemy2Image;
     private javax.swing.JLabel labelEnemy2Name;
     private javax.swing.JLabel labelEnemy3HP;
+    private javax.swing.JLabel labelEnemy3Icon;
+    private javax.swing.JLabel labelEnemy3Image;
     private javax.swing.JLabel labelEnemy3Name;
     private javax.swing.JLabel labelNameChar1;
     private javax.swing.JLabel labelNameChar2;
