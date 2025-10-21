@@ -98,4 +98,7 @@ public class RpgCharacter{
     public int getAgility() {
         return this.agility;
     }
+    public int getVitality() {
+    return vitality;
+}
 }
