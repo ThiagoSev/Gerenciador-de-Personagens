@@ -1,4 +1,4 @@
 package com.mycompany.mavenproject1;
 public interface RpgClass {
-    public int specialAttack();
+    public int specialAttack(RpgCharacter attackerCharacter, RpgCharacter defenserCharacter);
 }

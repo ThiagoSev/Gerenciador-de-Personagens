@@ -5,6 +5,7 @@
 package com.mycompany.mavenproject1.gui;
 import com.mycompany.mavenproject1.RpgCharacter;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,9 +14,14 @@ import java.util.Random;
 
 
 import java.awt.Image; 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;   
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
@@ -124,6 +130,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         labelEnemy1Image = new javax.swing.JLabel();
         labelEnemy2Image = new javax.swing.JLabel();
         labelEnemy3Image = new javax.swing.JLabel();
+        btnCreateTeamTest = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miCharacterEditorCard = new javax.swing.JMenuItem();
@@ -272,7 +279,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(169, 169, 169)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -549,6 +556,13 @@ public class FrCreateCharacter extends javax.swing.JFrame {
 
         labelEnemy1Image.setText("  ");
 
+        btnCreateTeamTest.setText("jToggleButton1");
+        btnCreateTeamTest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCreateTeamTestMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -557,7 +571,9 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btnCommonAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCommonAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCreateTeamTest))
                         .addGap(47, 47, 47)
                         .addComponent(btnClassAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
@@ -621,7 +637,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                                 .addComponent(labelEnemy2Image, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(labelEnemy3Image, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -685,9 +701,14 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                     .addComponent(btnClassAttack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCommonAttack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDeflect, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(btnBattleRun)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnBattleRun))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCreateTeamTest)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, "BattleCard");
@@ -726,7 +747,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 635, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -762,6 +783,16 @@ public class FrCreateCharacter extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarActionPerformed
+    private void bttCreateTeamTestMouseClicked(java.awt.event.MouseEvent evt) {                                      
+        System.out.println("pagina sendo carregada...");
+        playerTeam[0] = new RpgCharacter("Primeiro",2,1,1,1,1);
+        playerTeam[1] = new RpgCharacter("Segundo",1,1,1,1,1);
+        playerTeam[2] = new RpgCharacter("Terceiro",1,1,1,1,1);
+        computerTeam[0] = new RpgCharacter("Quarto",2,1,1,1,1);
+        computerTeam[1] = new RpgCharacter("Quinto",2,1,1,1,1);
+        computerTeam[2] = new RpgCharacter("Sexto",0,1,1,1,1);
+        loadTeamInBattle(playerTeam,computerTeam);   
+    }
     ArrayList<RpgCharacter> characters = new ArrayList<RpgCharacter>();
     private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
      try {
@@ -916,13 +947,15 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
     }
 }
     private void btnCommonAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCommonAttackMouseClicked
-        combatPlayerCharacters[currentCharacter].commonAttack(playerTeam[currentCharacter], computerTeam[currentCharacter]);
+        float damageTaken = combatPlayerCharacters[currentCharacter].commonAttack(playerTeam[currentCharacter], computerTeam[currentCharacter]);
+        showCombatActionMessage(damageTaken, playerTeam[currentCharacter], computerTeam[currentCharacter], "ataque corpo a corpo");
         updateTeaInBattle();
         // invoca a função "commonAttack" da classe "Character"
     }//GEN-LAST:event_btnCommonAttackMouseClicked
 
     private void btnClassAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClassAttackMouseClicked
-        combatPlayerCharacters[currentCharacter].specialAttack();
+        float damageTaken = combatPlayerCharacters[currentCharacter].specialAttack(playerTeam[currentCharacter], computerTeam[currentCharacter]);
+        showCombatActionMessage(damageTaken, playerTeam[currentCharacter], computerTeam[currentCharacter], btnClassAttack.getText());
         updateTeaInBattle();
         // invoca a função "specialAttack" da classe "Character"
     }//GEN-LAST:event_btnClassAttackMouseClicked
@@ -971,18 +1004,22 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-    private void loadTeamInBattle(ArrayList<RpgCharacter> playerTeam, ArrayList<RpgCharacter> computerTeam){
-        labelChar1Name.setText(playerTeam.get(0).getName());
-        labelChar2Name.setText(playerTeam.get(1).getName());
-        labelChar3Name.setText(playerTeam.get(2).getName());
-        labelChar1HP.setText("HP: "+playerTeam.get(0).getStamina());
-        labelChar2HP.setText("HP: "+playerTeam.get(1).getStamina());
-        labelChar3HP.setText("HP: "+playerTeam.get(2).getStamina());
-    }
-    
+   
     private void jButton1MouseClicked1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked1
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked1
+
+    private void btnCreateTeamTestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateTeamTestMouseClicked
+        playerTeam = new RpgCharacter[3];
+        computerTeam = new RpgCharacter[3];
+        playerTeam[0] = new RpgCharacter("Primeiro",1,1,1,1,1);
+        playerTeam[1] = new RpgCharacter("Segundo",1,1,1,1,1);
+        playerTeam[2] = new RpgCharacter("Terceiro",1,1,1,1,1);
+        computerTeam[0] = new RpgCharacter("Quarto",1,1,1,1,1);
+        computerTeam[1] = new RpgCharacter("Quinto",1,1,1,1,1);
+        computerTeam[2] = new RpgCharacter("Sexto",1,1,1,1,1);
+        loadTeamInBattle(playerTeam,computerTeam);
+    }//GEN-LAST:event_btnCreateTeamTestMouseClicked
     
     private void loadTeamInBattle(RpgCharacter[] playerTeam, RpgCharacter[] computerTeam){
         for(int i =0;i<3;i++){
@@ -1034,8 +1071,9 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
     }
     private void currentCharacter(){
         if(playableCharacter){
-            loadPlayerAttack(combatPlayerCharacters[currentCharacter]);
+            loadButtonClassAttack(combatPlayerCharacters[currentCharacter]);
         }else{
+            loadButtonClassAttack(combatComputerCharacters[currentCharacter]);
             loadComputerAttack(combatComputerCharacters[currentCharacter]);
         }
         
@@ -1049,7 +1087,7 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
         //modifica a variável que indica a posição do array
         //chama a função de novo
     }
-    private void loadPlayerAttack(RpgCharacter character){
+    private void loadButtonClassAttack(RpgCharacter character){
         switch(character.getRpgClassName()){
             case "Warrior":
                 btnClassAttack.setText("Ataque de Espada");
@@ -1075,12 +1113,15 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
     }
     private void loadComputerAttack(RpgCharacter character){
         int randomAction = randomGenerator.nextInt(1);
+        float damageTaken;
         switch(randomAction){
             case 0:
-                character.commonAttack(character, combatPlayerCharacters[currentCharacter]);
+                damageTaken = character.commonAttack(character, combatPlayerCharacters[currentCharacter]);
+                showCombatActionMessage(damageTaken, character, combatPlayerCharacters[currentCharacter], "corpo a corpo");
                 break;
             case 1:
-                character.specialAttack();
+                damageTaken =character.specialAttack(character, combatPlayerCharacters[currentCharacter]);
+                showCombatActionMessage(damageTaken, character, combatPlayerCharacters[currentCharacter], btnClassAttack.getText());
                 break;
             default:
                 break;
@@ -1088,6 +1129,27 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
         updateTeaInBattle();
         //lê o personagem que vai agir
         //seleciona aleatoriamente uma das funções "commonAttack", "specialAttack" ou "deflect"
+    }
+    private void showCombatActionMessage(float damageTaken, RpgCharacter attacker, RpgCharacter defenser, String attackMethod){
+        JOptionPane optionPane = new JOptionPane("Your message here!", JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog =  optionPane.createDialog(null, null);//new JDialog();
+        if(damageTaken < 0){
+            optionPane.setMessage(attacker.getName()+ " deu "+damageTaken*-1+" no "+defenser.getName()+" com "+attackMethod);
+        }else{
+            optionPane.setMessage(defenser.getName()+" desviou do ataque");
+        }
+        
+        Timer timer = new Timer(2000, new ActionListener() { // 3000ms = 3 seconds
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose(); // Close the dialog
+            }
+        });
+        timer.setRepeats(false); // Ensure the timer only fires once
+        timer.start();
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
     }
     /**
      * @param args the command line arguments
@@ -1101,6 +1163,7 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
     private javax.swing.JButton btnBattleRun;
     private javax.swing.JButton btnClassAttack;
     private javax.swing.JButton btnCommonAttack;
+    private javax.swing.JToggleButton btnCreateTeamTest;
     private javax.swing.JButton btnDeflect;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbRpgClass;

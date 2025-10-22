@@ -54,7 +54,7 @@ public class RpgCharacter{
         if(defenserCharacter.getDefense() > random.nextInt(6)+1){
             System.out.println("\n"+defenserName + " stamina: "+ defenserCharacter.getStamina());
             System.out.println(attackerName + " attacks "+ defenserName);
-            int damageTaken = (attackerCharacter.getStrength() + 3)*(-1);
+            int damageTaken = (attackerCharacter.getStrength() + 3)*(-1); //dano será sempre negativo
             defenserCharacter.setStamina(damageTaken);
             System.out.println(defenserName + " stamina: "+ defenserCharacter.getStamina());
             return damageTaken;
@@ -63,12 +63,12 @@ public class RpgCharacter{
             return 0;
         }
     }
-    public int specialAttack(){
-        return rpgClass.specialAttack();
+    public int specialAttack(RpgCharacter attackerCharacter, RpgCharacter defenserCharacter){
+        return rpgClass.specialAttack(attackerCharacter, defenserCharacter);
     }
-    public int deflect(){
+    public int deflect(RpgCharacter attackerCharacter, RpgCharacter defenserCharacter){
         //decide se o personagem consegue desviar
-        return rpgClass.specialAttack();
+        return rpgClass.specialAttack(attackerCharacter, defenserCharacter);
     }
     public String getName() {
         return this.name;
