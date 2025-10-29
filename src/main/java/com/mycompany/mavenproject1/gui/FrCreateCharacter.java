@@ -30,7 +30,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FrCreateCharacter extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrCreateCharacter.class.getName());
-
+    
  
        
     private String caminhoImagem;
@@ -506,6 +506,11 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         jPanel1.add(jPanel3, "TeamEditorCard");
 
         btnBattleRun.setText("Abandonar Partida");
+        btnBattleRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBattleRunActionPerformed(evt);
+            }
+        });
 
         btnCommonAttack.setText("Corpo a Corpo");
         btnCommonAttack.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -751,10 +756,11 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void miCharacterEditorCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCharacterEditorCardActionPerformed
@@ -1012,29 +1018,36 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
     private void btnCreateTeamTestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateTeamTestMouseClicked
         playerTeam = new RpgCharacter[3];
         computerTeam = new RpgCharacter[3];
-        playerTeam[0] = new RpgCharacter("Primeiro",1,1,1,1,1);
+        playerTeam[0] = new RpgCharacter("Primeiro",0,1,1,1,1);
         playerTeam[1] = new RpgCharacter("Segundo",1,1,1,1,1);
-        playerTeam[2] = new RpgCharacter("Terceiro",1,1,1,1,1);
-        computerTeam[0] = new RpgCharacter("Quarto",1,1,1,1,1);
+        playerTeam[2] = new RpgCharacter("Terceiro",2,1,1,1,1);
+        computerTeam[0] = new RpgCharacter("Quarto",0,1,1,1,1);
         computerTeam[1] = new RpgCharacter("Quinto",1,1,1,1,1);
-        computerTeam[2] = new RpgCharacter("Sexto",1,1,1,1,1);
+        computerTeam[2] = new RpgCharacter("Sexto",2,1,1,1,1);
         loadTeamInBattle(playerTeam,computerTeam);
     }//GEN-LAST:event_btnCreateTeamTestMouseClicked
+
+    private void btnBattleRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBattleRunActionPerformed
+        miTeamEditorCardActionPerformed(evt); //leva o usuário para a tela de seleção de equipes
+        JOptionPane optionPane = new JOptionPane("você fugiu da batalha :(", JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog =  optionPane.createDialog(null, "");
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnBattleRunActionPerformed
     
     private void loadTeamInBattle(RpgCharacter[] playerTeam, RpgCharacter[] computerTeam){
         for(int i =0;i<3;i++){
             switch(playerTeam[i].getRpgClassName()){
             case "Warrior":
-                labelCharImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBody.png"));
-                labelCharIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
+                labelCharImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBody.png"));
+                labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
                 break;
             case "Archer":
-                labelCharImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBody.png"));
-                labelCharIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
+                labelCharImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBody.png"));
+                labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
                 break;
             case "Mage":
-                labelCharImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBody.png"));
-                labelCharIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
+                labelCharImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBody.png"));
+                labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
                 break;    
             default:
                 break;
@@ -1046,16 +1059,16 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
         for(int i =0;i<3;i++){
             switch(computerTeam[i].getRpgClassName()){
             case "Warrior":
-                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBodyBack.png"));
-                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
+                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBodyBack.png"));
+                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
                 break;
             case "Archer":
-                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBodyBack.png"));
-                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
+                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBodyBack.png"));
+                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
                 break;
             case "Mage":
-                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBodyBack.png"));
-                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon("C:\\Users\\sever\\OneDrive\\Documents\\NetBeansProjects\\mavenproject1\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
+                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBodyBack.png"));
+                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
                 break;    
             default:
                 break;
