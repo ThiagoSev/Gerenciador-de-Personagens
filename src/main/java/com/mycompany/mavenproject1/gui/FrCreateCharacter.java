@@ -40,6 +40,11 @@ public class FrCreateCharacter extends javax.swing.JFrame {
      */
     public FrCreateCharacter() {
         initComponents();
+        
+            setResizable(false);
+            setSize(1000, 720);
+            setLocationRelativeTo(null);
+          
         this.labelCharHP = new JLabel[]{labelChar1HP, labelChar2HP, labelChar3HP};
         this.labelCharName = new JLabel[]{labelChar1Name, labelChar2Name, labelChar3Name};
         this.labelCharImage = new JLabel[]{labelChar1Image, labelChar2Image, labelChar3Image};        
@@ -765,7 +770,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
     );
 
     pack();
@@ -888,36 +893,52 @@ public class FrCreateCharacter extends javax.swing.JFrame {
         loadTeamInBattle(playerTeam,computerTeam);
         currentCharacter();
     }
-    private void adicionarImagemAoTime(Object iconeObj, int row) {
-        if (!(iconeObj instanceof ImageIcon)) return;
+private void adicionarImagemAoTime(Object iconeObj, int row) {
+    ImageIcon iconeFinal;
 
-        ImageIcon iconeOriginal = (ImageIcon) iconeObj;
-        String nomePersonagem = (String) jTable1.getValueAt(row, 2); 
+    if (iconeObj instanceof ImageIcon) {
+        iconeFinal = (ImageIcon) iconeObj;
+    } else {
+        String classePersonagem = (String) jTable1.getValueAt(row, 3); // Coluna da classe
+        String caminhoPadrao = "";
 
-        JLabel[] slots = {TimeImagem1, TimeImagem2, TimeImagem3};
-        javax.swing.JTextField[] camposNome = {txtChar1Name, txtChar2Name, txtChar3Name};
-
-        for (int i = 0; i < slots.length; i++) {
-            if (slots[i].getIcon() == null) {
-                // Redimensiona a imagem
-                Image img = iconeOriginal.getImage();
-                Image scaled = img.getScaledInstance(
-                    slots[i].getWidth(), slots[i].getHeight(),
-                    Image.SCALE_SMOOTH
-                );
-                ImageIcon redimensionada = new ImageIcon(scaled);
-
-                slots[i].setIcon(redimensionada);
-                camposNome[i].setText(nomePersonagem);
-
-                slots[i].setHorizontalAlignment(JLabel.CENTER);
-                camposNome[i].setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-                return;
-            }
+        switch (classePersonagem) {
+            case "Warrior":
+                caminhoPadrao = ".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBody.png";
+                break;
+            case "Archer":
+                caminhoPadrao = ".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBody.png";
+                break;
+            case "Mage":
+                caminhoPadrao = ".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBody.png";
+                break;
         }
-        JOptionPane.showMessageDialog(this, "Você já selecionou 3 personagens!");
+
+        iconeFinal = new ImageIcon(caminhoPadrao);
     }
+
+    String nomePersonagem = (String) jTable1.getValueAt(row, 2);
+
+    JLabel[] slots = {TimeImagem1, TimeImagem2, TimeImagem3};
+    javax.swing.JTextField[] camposNome = {txtChar1Name, txtChar2Name, txtChar3Name};
+
+    for (int i = 0; i < slots.length; i++) {
+        if (slots[i].getIcon() == null) {
+            Image img = iconeFinal.getImage();
+            Image scaled = img.getScaledInstance(slots[i].getWidth(), slots[i].getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon redimensionada = new ImageIcon(scaled);
+
+            slots[i].setIcon(redimensionada);
+            camposNome[i].setText(nomePersonagem);
+
+            slots[i].setHorizontalAlignment(JLabel.CENTER);
+            camposNome[i].setHorizontalAlignment(javax.swing.JTextField.CENTER);
+            return;
+        }
+    }
+
+    JOptionPane.showMessageDialog(this, "Você já selecionou 3 personagens!");
+}
 
     private void removerImagemDoTime(int row) {
         String nomePersonagem = (String) jTable1.getValueAt(row, 2);
@@ -1098,80 +1119,50 @@ public class FrCreateCharacter extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSalvarTimeMouseClicked1
 
     private void BtnExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnExcluirMouseClicked
- boolean temPersonagemSelecionado = false;
-    DefaultTableModel modelPersonagem = (DefaultTableModel) jTable1.getModel();
-    for (int i = 0; i < modelPersonagem.getRowCount(); i++) {
-        Object val = modelPersonagem.getValueAt(i, 0);
+      DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel(); 
+    DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel(); 
+    boolean excluiuAlgo = false;
+
+    int confirm = JOptionPane.showConfirmDialog(
+        this,
+        "Tem certeza que deseja excluir o(s) item(ns) selecionado(s)?",
+        "Confirmar Exclusão",
+        JOptionPane.YES_NO_OPTION,
+        JOptionPane.WARNING_MESSAGE
+    );
+
+    if (confirm != JOptionPane.YES_OPTION) {
+        return; 
+    }
+
+    for (int i = model1.getRowCount() - 1; i >= 0; i--) {
+        Object val = model1.getValueAt(i, 0);
         if (val instanceof Boolean && (Boolean) val) {
-            temPersonagemSelecionado = true;
-            break;
+            removerImagemDoTime(i); 
+            model1.removeRow(i);   
+            if (i < characters.size()) {
+                characters.remove(i); 
+            }
+            excluiuAlgo = true;
         }
     }
 
-    boolean temTimeSelecionado = false;
-    DefaultTableModel modelTime = (DefaultTableModel) jTable2.getModel();
-    for (int i = 0; i < modelTime.getRowCount(); i++) {
-        Object val = modelTime.getValueAt(i, 0);
+    for (int i = model2.getRowCount() - 1; i >= 0; i--) {
+        Object val = model2.getValueAt(i, 0);
         if (val instanceof Boolean && (Boolean) val) {
-            temTimeSelecionado = true;
-            break;
+            model2.removeRow(i);
+            if (i < teams.size()) {
+                teams.remove(i);
+            }
+            excluiuAlgo = true;
         }
     }
 
-    if (temPersonagemSelecionado) {
-        excluirPersonagensSelecionados();
-        return;
+    if (excluiuAlgo) {
+        JOptionPane.showMessageDialog(this, "Exclusão realizada com sucesso!");
+    } else {
+        JOptionPane.showMessageDialog(this, "Nenhum item selecionado para exclusão.");
     }
-
-    if (temTimeSelecionado) {
-        excluirTimesSelecionados();
-        return;
-    }
-
-    JOptionPane.showMessageDialog(this, "Nenhum personagem ou time selecionado para exclusão!");
-}
-    private void excluirPersonagensSelecionados() {
-    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-    java.util.List<Integer> linhasRemover = new ArrayList<>();
-
-    for (int i = 0; i < model.getRowCount(); i++) {
-        Object val = model.getValueAt(i, 0);
-        if (val instanceof Boolean && (Boolean) val) {
-            linhasRemover.add(i);
-        }
-    }
-
-    for (int i = linhasRemover.size() - 1; i >= 0; i--) {
-        int index = linhasRemover.get(i);
-        model.removeRow(index);
-        if (index < characters.size()) {
-            characters.remove(index);
-        }
-    }
-
-    JOptionPane.showMessageDialog(this, "Personagem(ns) excluído(s) com sucesso!");
-}
-    private void excluirTimesSelecionados() {
-    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-    java.util.List<Integer> linhasRemover = new ArrayList<>();
-
-    for (int i = 0; i < model.getRowCount(); i++) {
-        Object val = model.getValueAt(i, 0);
-        if (val instanceof Boolean && (Boolean) val) {
-            linhasRemover.add(i);
-        }
-    }
-
-    for (int i = linhasRemover.size() - 1; i >= 0; i--) {
-        int index = linhasRemover.get(i);
-        model.removeRow(index);
-        if (index < teams.size()) {
-            teams.remove(index);
-        }
-    }
-
-    JOptionPane.showMessageDialog(this, "Time(s) excluído(s) com sucesso!");
-
     }//GEN-LAST:event_BtnExcluirMouseClicked
     
     private void loadTeamInBattle(RpgCharacter[] playerTeam, RpgCharacter[] computerTeam){
