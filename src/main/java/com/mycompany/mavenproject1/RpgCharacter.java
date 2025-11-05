@@ -51,12 +51,10 @@ public class RpgCharacter{
         Random random = new Random();
         String defenserName = defenserCharacter.getName();
         String attackerName = attackerCharacter.getName();
-        if(defenserCharacter.getDefense() > random.nextInt(6)+1){
-            System.out.println("\n"+defenserName + " stamina: "+ defenserCharacter.getStamina());
-            System.out.println(attackerName + " attacks "+ defenserName);
+        if(defenserCharacter.getDefense() < random.nextInt(6)+1){
             int damageTaken = (attackerCharacter.getStrength() + 3)*(-1); //dano será sempre negativo
             defenserCharacter.setStamina(damageTaken);
-            System.out.println(defenserName + " stamina: "+ defenserCharacter.getStamina());
+            System.out.println(attackerName + " deu "+damageTaken+" de dano no "+ defenserName);
             return damageTaken;
         }else{
             System.out.println(defenserName + " desviou do ataque");
@@ -84,6 +82,19 @@ public class RpgCharacter{
     }
     public void setStamina(int num) {
         this.stamina += num;
+    }
+    public void resetStamina(){
+        switch(this.rpgClassName){
+            case "Warrior":
+                this.stamina = 20+this.vitality;
+                break;
+            case "Archer":
+                this.stamina = 17+this.vitality;
+                break;
+            case "Mage":
+                this.stamina = 12+this.vitality;
+                break;
+        }
     }
     public int getMana(){
         return 1;

@@ -438,8 +438,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
                     .addGap(209, 209, 209)
                     .addComponent(jLabel11)
                     .addGap(94, 94, 94)
-                    .addComponent(jLabel9)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel9))
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -766,7 +765,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, Short.MAX_VALUE)
     );
 
     pack();
@@ -972,17 +971,57 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
 
     return inimigos;
 }
+    private RpgCharacter getNextAliveTarget(RpgCharacter[] teamTarget,int startIndex){
+        for(int i = startIndex; i<3;i++){
+            if(teamTarget[i].getStamina()>0){
+                return teamTarget[i];
+            }
+        }
+        for(int i=0; i<3;i++){
+            if(teamTarget[i].getStamina()>0){
+                return teamTarget[i];
+            }
+        }
+        return null;
+    }
+    private RpgCharacter getNextAliveAttacker(RpgCharacter[] teamTarget,int startIndex){
+        for(int i = startIndex; i<3;i++){
+            if(teamTarget[i].getStamina()>0){
+                currentCharacter=i;
+                return teamTarget[i];
+            }
+        }
+        for(int i=0; i<3;i++){
+            if(teamTarget[i].getStamina()>0){
+                currentCharacter=i;
+                return teamTarget[i];
+            }
+        }
+        return null;
+    }
+    
     private void btnCommonAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCommonAttackMouseClicked
-        float damageTaken = combatPlayerCharacters[currentCharacter].commonAttack(playerTeam[currentCharacter], computerTeam[currentCharacter]);
-        showCombatActionMessage(damageTaken, playerTeam[currentCharacter], computerTeam[currentCharacter], "ataque corpo a corpo");
-        updateTeaInBattle();
+        RpgCharacter target = getNextAliveTarget(computerTeam,currentCharacter);
+        if(target != null){
+            float damageTaken = combatPlayerCharacters[currentCharacter].commonAttack(playerTeam[currentCharacter], target);
+            showCombatActionMessage(damageTaken, playerTeam[currentCharacter], target, "ataque corpo a corpo");
+            updateTeaInBattle();
+        }else{
+            BattleEnd();
+        }
+        
         // invoca a função "commonAttack" da classe "Character"
     }//GEN-LAST:event_btnCommonAttackMouseClicked
 
     private void btnClassAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClassAttackMouseClicked
-        float damageTaken = combatPlayerCharacters[currentCharacter].specialAttack(playerTeam[currentCharacter], computerTeam[currentCharacter]);
-        showCombatActionMessage(damageTaken, playerTeam[currentCharacter], computerTeam[currentCharacter], btnClassAttack.getText());
-        updateTeaInBattle();
+        RpgCharacter target = getNextAliveTarget(computerTeam,currentCharacter);
+        if(target != null){
+            float damageTaken = combatPlayerCharacters[currentCharacter].specialAttack(playerTeam[currentCharacter], target);
+            showCombatActionMessage(damageTaken, playerTeam[currentCharacter], target, btnClassAttack.getText());
+            updateTeaInBattle();
+        }else{
+            BattleEnd();
+        }
         // invoca a função "specialAttack" da classe "Character"
     }//GEN-LAST:event_btnClassAttackMouseClicked
 
@@ -1024,12 +1063,22 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
     }//GEN-LAST:event_BtnSalvarImagemMouseClicked
    
     private void btnBattleRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBattleRunActionPerformed
+        for(int i =0;i<3;i++){
+            playerTeam[i].resetStamina();
+        }
+        currentCharacter=0;
         miTeamEditorCardActionPerformed(evt); //leva o usuário para a tela de seleção de equipes
         JOptionPane optionPane = new JOptionPane("você fugiu da batalha :(", JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog =  optionPane.createDialog(null, "");
         dialog.setVisible(true);
     }//GEN-LAST:event_btnBattleRunActionPerformed
-
+    private void BattleEnd(){
+        CardLayout cardlayout = (CardLayout) jPanel1.getLayout();
+        cardlayout.show(jPanel1,"TeamEditorCard");
+        JOptionPane optionPane = new JOptionPane("o jogo acabou", JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog =  optionPane.createDialog(null, "");
+        dialog.setVisible(true);
+    }
     private void BtnBatalharTimeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBatalharTimeMouseClicked
         if (teams == null || teams.isEmpty()) {
             JOptionPane.showMessageDialog(this,
@@ -1213,46 +1262,62 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
     
     private void loadTeamInBattle(RpgCharacter[] playerTeam, RpgCharacter[] computerTeam){
         for(int i =0;i<3;i++){
-            switch(playerTeam[i].getRpgClassName()){
-            case "Warrior":
-                labelCharImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBody.png"));
-                labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
-                break;
-            case "Archer":
-                labelCharImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBody.png"));
-                labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
-                break;
-            case "Mage":
-                labelCharImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBody.png"));
-                labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
-                break;    
-            default:
-                break;
+            if(playerTeam[i].getStamina() > 0){
+                switch(playerTeam[i].getRpgClassName()){
+                case "Warrior":
+                    labelCharImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBody.png"));
+                    labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
+                    break;
+                case "Archer":
+                    labelCharImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBody.png"));
+                    labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
+                    break;
+                case "Mage":
+                    labelCharImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBody.png"));
+                    labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
+                    break;    
+                default:
+                    break;
+                }
+                labelCharName[i].setText(playerTeam[i].getName());
+                labelCharHP[i].setText("HP: "+playerTeam[i].getStamina());
+                combatPlayerCharacters[i] = playerTeam[i];
+            }else{
+                labelCharImage[i].setIcon(null);
+                labelCharIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\deadIcon.png"));
+                labelCharName[i].setText(playerTeam[i].getName());
+                labelCharHP[i].setText("HP: "+playerTeam[i].getStamina());
+                combatPlayerCharacters[i] = playerTeam[i];
             }
-            labelCharName[i].setText(playerTeam[i].getName());
-            labelCharHP[i].setText("HP: "+playerTeam[i].getStamina());
-            combatPlayerCharacters[i] = playerTeam[i];
         }
         for(int i =0;i<3;i++){
-            switch(computerTeam[i].getRpgClassName()){
-            case "Warrior":
-                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBodyBack.png"));
-                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
-                break;
-            case "Archer":
-                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBodyBack.png"));
-                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
-                break;
-            case "Mage":
-                labelEnemyImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBodyBack.png"));
-                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
-                break;    
-            default:
-                break;
+            if(computerTeam[i].getStamina() > 0){
+                switch(computerTeam[i].getRpgClassName()){
+                case "Warrior":
+                    labelEnemyImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorBodyBack.png"));
+                    labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\warriorIcon.png"));
+                    break;
+                case "Archer":
+                    labelEnemyImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerBodyBack.png"));
+                    labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\archerIcon.png"));
+                    break;
+                case "Mage":
+                    labelEnemyImage[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageBodyBack.png"));
+                    labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\mageIcon.png"));
+                    break;    
+                default:
+                    break;
+                }
+                labelEnemyName[i].setText(computerTeam[i].getName());
+                labelEnemyHP[i].setText("HP: "+computerTeam[i].getStamina());
+                combatComputerCharacters[i] = computerTeam[i];
+            }else{
+                labelEnemyImage[i].setIcon(null);
+                labelEnemyIcon[i].setIcon(new javax.swing.ImageIcon(".\\src\\main\\java\\com\\mycompany\\mavenproject1\\images\\deadIcon.png"));
+                labelEnemyName[i].setText(computerTeam[i].getName());
+                labelEnemyHP[i].setText("HP: "+computerTeam[i].getStamina());
+                combatComputerCharacters[i] = computerTeam[i];
             }
-            labelEnemyName[i].setText(computerTeam[i].getName());
-            labelEnemyHP[i].setText("HP: "+computerTeam[i].getStamina());
-            combatComputerCharacters[i] = computerTeam[i];
         }
         //recebe os dados da tela TeamLoader
         //cria um array com a ordem de ação dos personagens
@@ -1260,11 +1325,14 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
         currentCharacter();
     }
     private void currentCharacter(){
+        
         if(playableCharacter){
-            loadButtonClassAttack(combatPlayerCharacters[currentCharacter]);
+           RpgCharacter aliveChar = getNextAliveAttacker(combatPlayerCharacters, currentCharacter);
+           loadButtonClassAttack(aliveChar);
         }else{
-            loadButtonClassAttack(combatComputerCharacters[currentCharacter]);
-            loadComputerAttack(combatComputerCharacters[currentCharacter]);
+            RpgCharacter aliveEnemy = getNextAliveAttacker(combatComputerCharacters, currentCharacter);
+            loadButtonClassAttack(aliveEnemy);
+            loadComputerAttack(aliveEnemy);
         }
         
         
@@ -1304,17 +1372,22 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
     private void loadComputerAttack(RpgCharacter character){
         int randomAction = randomGenerator.nextInt(1);
         float damageTaken;
-        switch(randomAction){
-            case 0:
-                damageTaken = character.commonAttack(character, combatPlayerCharacters[currentCharacter]);
-                showCombatActionMessage(damageTaken, character, combatPlayerCharacters[currentCharacter], "corpo a corpo");
-                break;
-            case 1:
-                damageTaken =character.specialAttack(character, combatPlayerCharacters[currentCharacter]);
-                showCombatActionMessage(damageTaken, character, combatPlayerCharacters[currentCharacter], btnClassAttack.getText());
-                break;
-            default:
-                break;
+        RpgCharacter target = getNextAliveTarget(playerTeam,currentCharacter);
+        if(target != null){
+            switch(randomAction){
+                case 0:
+                    damageTaken = character.commonAttack(character, target);
+                    showCombatActionMessage(damageTaken, character, target, "corpo a corpo");
+                    break;
+                case 1:
+                    damageTaken =character.specialAttack(character, target);
+                    showCombatActionMessage(damageTaken, character, target, btnClassAttack.getText());
+                    break;
+                default:
+                    break;
+            }
+        }else{
+            BattleEnd();
         }
         updateTeaInBattle();
         //lê o personagem que vai agir
