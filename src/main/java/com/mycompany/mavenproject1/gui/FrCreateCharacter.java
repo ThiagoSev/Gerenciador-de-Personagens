@@ -789,7 +789,7 @@ public class FrCreateCharacter extends javax.swing.JFrame {
 
     ArrayList<RpgCharacter> characters = new ArrayList<RpgCharacter>();
     private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
-     try {
+        try {
             String characterName = tfCharacterName.getText();
             if (characterName.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "O nome do personagem não pode estar vazio.", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
@@ -815,60 +815,53 @@ public class FrCreateCharacter extends javax.swing.JFrame {
             RpgCharacter tempchar = new RpgCharacter(characterName, classIndex, intStrength, intAgility, intVitality, intIntelligence);
 
             
- if (tempchar != null) {
+            if (tempchar != null) {
 
-            characters.add(tempchar);
-            JOptionPane.showMessageDialog(this, "Personagem cadastrado com sucesso!");
+                characters.add(tempchar);
+                JOptionPane.showMessageDialog(this, "Personagem cadastrado com sucesso!");
 
-   
-            ImageIcon imagemIcone = null;
-            if (caminhoImagem != null && !caminhoImagem.isEmpty()) {
-                ImageIcon original = new ImageIcon(caminhoImagem);
-                Image imgRedimensionada = original.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-                imagemIcone = new ImageIcon(imgRedimensionada);
+    
+                ImageIcon imagemIcone = null;
+                if (caminhoImagem != null && !caminhoImagem.isEmpty()) {
+                    ImageIcon original = new ImageIcon(caminhoImagem);
+                    Image imgRedimensionada = original.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+                    imagemIcone = new ImageIcon(imgRedimensionada);
+                }
+
+                DefaultTableModel tablemodel = (DefaultTableModel) jTable1.getModel();
+                tablemodel.addRow(new Object[]{
+                    false,
+                    imagemIcone,
+                    tempchar.getName(),
+                    tempchar.getRpgClassName(),
+                    Integer.toString(tempchar.getStamina()),
+                    Integer.toString(tempchar.getMana()),
+                    Integer.toString(tempchar.getStrength()),
+                    Integer.toString(tempchar.getVitality()),
+                    Integer.toString(tempchar.getAgility()),
+                });
+                System.out.println("Caminho da imagem: " + caminhoImagem);
+                System.out.println("Imagem criada: " + (imagemIcone != null));
+                jTable1.setRowHeight(60);
+                limparCampos();
             }
-
-            DefaultTableModel tablemodel = (DefaultTableModel) jTable1.getModel();
-            tablemodel.addRow(new Object[]{
-                false,
-                imagemIcone,
-                tempchar.getName(),
-                tempchar.getRpgClassName(),
-                Integer.toString(tempchar.getStamina()),
-                Integer.toString(tempchar.getMana()),
-                Integer.toString(tempchar.getStrength()),
-                Integer.toString(tempchar.getVitality()),
-                Integer.toString(tempchar.getAgility()),
-            });
-            System.out.println("Caminho da imagem: " + caminhoImagem);
-            System.out.println("Imagem criada: " + (imagemIcone != null));
-            jTable1.setRowHeight(60);
-            limparCampos();
-            }
-        } catch (NumberFormatException e) {
+        }catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, insira apenas números inteiros nos campos de atributos.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
-        }
-                                     
+        }                              
     }//GEN-LAST:event_btnSalvarMouseClicked
-private void limparCampos(){
 
-tfCharacterName.setText("");
+    private void limparCampos(){
+        tfCharacterName.setText("");
+        tfStrength.setText("");
+        tfAgility.setText("");
+        tfVitality.setText("");
+        tfIntelligence.setText("");
+        cbRpgClass.setSelectedIndex(0);
+        LbnImagem.setIcon(null); 
+        LbnImagem.setText("Imagem");
+        caminhoImagem = null;
+    }
 
-tfStrength.setText("");
-
-tfAgility.setText("");
-
-tfVitality.setText("");
-
-tfIntelligence.setText("");
-
-cbRpgClass.setSelectedIndex(0);
-
-LbnImagem.setIcon(null); 
-
-LbnImagem.setText("Imagem");
-caminhoImagem = null;
-}
     Random randomGenerator = new Random();
     boolean playableCharacter = true;
     RpgCharacter[] combatPlayerCharacters = new RpgCharacter[3];
@@ -895,190 +888,112 @@ caminhoImagem = null;
         loadTeamInBattle(playerTeam,computerTeam);
         currentCharacter();
     }
-private void adicionarImagemAoTime(Object iconeObj, int row) {
-    if (!(iconeObj instanceof ImageIcon)) return;
+    private void adicionarImagemAoTime(Object iconeObj, int row) {
+        if (!(iconeObj instanceof ImageIcon)) return;
 
-    ImageIcon iconeOriginal = (ImageIcon) iconeObj;
-    String nomePersonagem = (String) jTable1.getValueAt(row, 2); 
+        ImageIcon iconeOriginal = (ImageIcon) iconeObj;
+        String nomePersonagem = (String) jTable1.getValueAt(row, 2); 
 
-    JLabel[] slots = {TimeImagem1, TimeImagem2, TimeImagem3};
-    javax.swing.JTextField[] camposNome = {txtChar1Name, txtChar2Name, txtChar3Name};
+        JLabel[] slots = {TimeImagem1, TimeImagem2, TimeImagem3};
+        javax.swing.JTextField[] camposNome = {txtChar1Name, txtChar2Name, txtChar3Name};
 
-    for (int i = 0; i < slots.length; i++) {
-        if (slots[i].getIcon() == null) {
-            // Redimensiona a imagem
-            Image img = iconeOriginal.getImage();
-            Image scaled = img.getScaledInstance(
-                slots[i].getWidth(), slots[i].getHeight(),
-                Image.SCALE_SMOOTH
-            );
-            ImageIcon redimensionada = new ImageIcon(scaled);
+        for (int i = 0; i < slots.length; i++) {
+            if (slots[i].getIcon() == null) {
+                // Redimensiona a imagem
+                Image img = iconeOriginal.getImage();
+                Image scaled = img.getScaledInstance(
+                    slots[i].getWidth(), slots[i].getHeight(),
+                    Image.SCALE_SMOOTH
+                );
+                ImageIcon redimensionada = new ImageIcon(scaled);
 
-            slots[i].setIcon(redimensionada);
-            camposNome[i].setText(nomePersonagem);
+                slots[i].setIcon(redimensionada);
+                camposNome[i].setText(nomePersonagem);
 
-            slots[i].setHorizontalAlignment(JLabel.CENTER);
-            camposNome[i].setHorizontalAlignment(javax.swing.JTextField.CENTER);
+                slots[i].setHorizontalAlignment(JLabel.CENTER);
+                camposNome[i].setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-            return;
+                return;
+            }
         }
+        JOptionPane.showMessageDialog(this, "Você já selecionou 3 personagens!");
     }
-
-    JOptionPane.showMessageDialog(this, "Você já selecionou 3 personagens!");
-}
 
     private void removerImagemDoTime(int row) {
-    String nomePersonagem = (String) jTable1.getValueAt(row, 2);
-    JLabel[] slots = {TimeImagem1, TimeImagem2, TimeImagem3};
-    javax.swing.JTextField[] camposNome = {txtChar1Name, txtChar2Name, txtChar3Name};
+        String nomePersonagem = (String) jTable1.getValueAt(row, 2);
+        JLabel[] slots = {TimeImagem1, TimeImagem2, TimeImagem3};
+        javax.swing.JTextField[] camposNome = {txtChar1Name, txtChar2Name, txtChar3Name};
 
-    for (int i = 0; i < slots.length; i++) {
-        if (camposNome[i].getText().equals(nomePersonagem)) {
-            slots[i].setIcon(null);
-            camposNome[i].setText("");
-            return;
+        for (int i = 0; i < slots.length; i++) {
+            if (camposNome[i].getText().equals(nomePersonagem)) {
+                slots[i].setIcon(null);
+                camposNome[i].setText("");
+                return;
+            }
         }
     }
-}
-  private RpgCharacter[] gerarInimigosAleatorios() {
-    Random random = new Random();
-    RpgCharacter[] inimigos = new RpgCharacter[3];
 
-    String[] nomes = {
-        "Goblin", "Orc", "Troll", "Lobo", "Espectro",
-        "Bandido", "Gárgula", "Esqueleto", "Zumbi", "Sombrio"
-    };
+    private RpgCharacter[] gerarInimigosAleatorios() {
+        Random random = new Random();
+        RpgCharacter[] inimigos = new RpgCharacter[3];
 
-    for (int i = 0; i < 3; i++) {
-        String nome = nomes[random.nextInt(nomes.length)];
+        String[] nomes = {
+            "Goblin", "Orc", "Troll", "Lobo", "Espectro",
+            "Bandido", "Gárgula", "Esqueleto", "Zumbi", "Sombrio"
+        };
 
-        int classe = random.nextInt(3);
+        for (int i = 0; i < 3; i++) {
+            String nome = nomes[random.nextInt(nomes.length)];
 
-        int totalPontos = 20;
-        int forca = random.nextInt(totalPontos + 1);
-        totalPontos -= forca;
+            int classe = random.nextInt(3);
 
-        int agilidade = random.nextInt(totalPontos + 1);
-        totalPontos -= agilidade;
+            int totalPontos = 20;
+            int forca = random.nextInt(totalPontos + 1);
+            totalPontos -= forca;
 
-        int vitalidade = random.nextInt(totalPontos + 1);
-        totalPontos -= vitalidade;
+            int agilidade = random.nextInt(totalPontos + 1);
+            totalPontos -= agilidade;
 
-        int inteligencia = totalPontos; 
+            int vitalidade = random.nextInt(totalPontos + 1);
+            totalPontos -= vitalidade;
 
-        inimigos[i] = new RpgCharacter(nome, classe, forca, agilidade, vitalidade, inteligencia);
-    }
+            int inteligencia = totalPontos; 
 
-    return inimigos;
-}
-    private RpgCharacter getNextAliveTarget(RpgCharacter[] teamTarget,int startIndex){
-        for(int i = startIndex; i<3;i++){
-            if(teamTarget[i].getStamina()>0){
-                return teamTarget[i];
-            }
+            inimigos[i] = new RpgCharacter(nome, classe, forca, agilidade, vitalidade, inteligencia);
         }
-        for(int i=0; i<3;i++){
-            if(teamTarget[i].getStamina()>0){
-                return teamTarget[i];
-            }
-        }
-        return null;
-    }
-    private RpgCharacter getNextAliveAttacker(RpgCharacter[] teamTarget,int startIndex){
-        for(int i = startIndex; i<3;i++){
-            if(teamTarget[i].getStamina()>0){
-                currentCharacter=i;
-                return teamTarget[i];
-            }
-        }
-        for(int i=0; i<3;i++){
-            if(teamTarget[i].getStamina()>0){
-                currentCharacter=i;
-                return teamTarget[i];
-            }
-        }
-        return null;
+        return inimigos;
     }
     
-    private void btnCommonAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCommonAttackMouseClicked
-        RpgCharacter target = getNextAliveTarget(computerTeam,currentCharacter);
-        if(target != null){
-            float damageTaken = combatPlayerCharacters[currentCharacter].commonAttack(playerTeam[currentCharacter], target);
-            showCombatActionMessage(damageTaken, playerTeam[currentCharacter], target, "ataque corpo a corpo");
-            updateTeaInBattle();
-        }else{
-            BattleEnd();
-        }
-        
-        // invoca a função "commonAttack" da classe "Character"
-    }//GEN-LAST:event_btnCommonAttackMouseClicked
-
-    private void btnClassAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClassAttackMouseClicked
-        RpgCharacter target = getNextAliveTarget(computerTeam,currentCharacter);
-        if(target != null){
-            float damageTaken = combatPlayerCharacters[currentCharacter].specialAttack(playerTeam[currentCharacter], target);
-            showCombatActionMessage(damageTaken, playerTeam[currentCharacter], target, btnClassAttack.getText());
-            updateTeaInBattle();
-        }else{
-            BattleEnd();
-        }
-        // invoca a função "specialAttack" da classe "Character"
-    }//GEN-LAST:event_btnClassAttackMouseClicked
-
-    private void btnDeflectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeflectMouseClicked
-        // invoca a função "deflect" da classe "Character"
-    }//GEN-LAST:event_btnDeflectMouseClicked
 
     private void BtnSalvarImagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnSalvarImagemMouseClicked
-    javax.swing.JFileChooser fileChooser = new 
-            javax.swing.JFileChooser(); 
-    fileChooser.setDialogTitle("Escolha uma imagem"); 
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser(); 
+        fileChooser.setDialogTitle("Escolha uma imagem"); 
 
-    javax.swing.filechooser.FileNameExtensionFilter filter = new 
-            javax.swing.filechooser.FileNameExtensionFilter( "Imagens JPG, PNG e GIF", "jpg", "jpeg", "png", "gif");
-    fileChooser.setFileFilter(filter); 
+        javax.swing.filechooser.FileNameExtensionFilter filter = new javax.swing.filechooser.FileNameExtensionFilter( "Imagens JPG, PNG e GIF", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(filter); 
 
-    int userSelection = fileChooser.showOpenDialog(this); 
-    if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) { 
-        try { 
-            java.io.File selectedFile = fileChooser.getSelectedFile(); 
-            caminhoImagem = selectedFile.getAbsolutePath(); 
-            
-            javax.swing.ImageIcon imageIcon = new 
-            javax.swing.ImageIcon(caminhoImagem);
-            
-            java.awt.Image image = imageIcon.getImage(); 
-            java.awt.Image newimg = image.getScaledInstance(LbnImagem.getWidth(), LbnImagem.getHeight(), java.awt.Image.SCALE_SMOOTH); 
-            javax.swing.ImageIcon finalIcon = new 
-            javax.swing.ImageIcon(newimg);
-            
-            LbnImagem.setIcon(finalIcon); 
+        int userSelection = fileChooser.showOpenDialog(this); 
+        if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) { 
+            try { 
+                java.io.File selectedFile = fileChooser.getSelectedFile(); 
+                caminhoImagem = selectedFile.getAbsolutePath(); 
                 
-            LbnImagem.setText(""); 
-        
-        } catch (Exception e) { 
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar a imagem.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE); 
+                javax.swing.ImageIcon imageIcon = new javax.swing.ImageIcon(caminhoImagem);
+                
+                java.awt.Image image = imageIcon.getImage(); 
+                java.awt.Image newimg = image.getScaledInstance(LbnImagem.getWidth(), LbnImagem.getHeight(), java.awt.Image.SCALE_SMOOTH); 
+                javax.swing.ImageIcon finalIcon = new javax.swing.ImageIcon(newimg);
+                
+                LbnImagem.setIcon(finalIcon); 
+                    
+                LbnImagem.setText(""); 
+            
+            } catch (Exception e) { 
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar a imagem.", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE); 
+            } 
         } 
-    } 
     }//GEN-LAST:event_BtnSalvarImagemMouseClicked
    
-    private void btnBattleRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBattleRunActionPerformed
-        for(int i =0;i<3;i++){
-            playerTeam[i].resetStamina();
-        }
-        currentCharacter=0;
-        miTeamEditorCardActionPerformed(evt); //leva o usuário para a tela de seleção de equipes
-        JOptionPane optionPane = new JOptionPane("você fugiu da batalha :(", JOptionPane.INFORMATION_MESSAGE);
-        JDialog dialog =  optionPane.createDialog(null, "");
-        dialog.setVisible(true);
-    }//GEN-LAST:event_btnBattleRunActionPerformed
-    private void BattleEnd(){
-        CardLayout cardlayout = (CardLayout) jPanel1.getLayout();
-        cardlayout.show(jPanel1,"TeamEditorCard");
-        JOptionPane optionPane = new JOptionPane("o jogo acabou", JOptionPane.INFORMATION_MESSAGE);
-        JDialog dialog =  optionPane.createDialog(null, "");
-        dialog.setVisible(true);
-    }
     private void BtnBatalharTimeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnBatalharTimeMouseClicked
         if (teams == null || teams.isEmpty()) {
             JOptionPane.showMessageDialog(this,
@@ -1106,9 +1021,8 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
             nomesEquipes[0]
         );
 
-        if (selecionada == null) {
-            return;
-        }
+        if (selecionada == null)return;
+        
 
         int index = Integer.parseInt(selecionada.split(" ")[1]) - 1;
 
@@ -1393,6 +1307,63 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
         //lê o personagem que vai agir
         //seleciona aleatoriamente uma das funções "commonAttack", "specialAttack" ou "deflect"
     }
+    private RpgCharacter getNextAliveTarget(RpgCharacter[] teamTarget,int startIndex){
+        for(int i = startIndex; i<3;i++){
+            if(teamTarget[i].getStamina()>0){
+                return teamTarget[i];
+            }
+        }
+        for(int i=0; i<3;i++){
+            if(teamTarget[i].getStamina()>0){
+                return teamTarget[i];
+            }
+        }
+        return null;
+    }
+    private RpgCharacter getNextAliveAttacker(RpgCharacter[] teamTarget,int startIndex){
+        for(int i = startIndex; i<3;i++){
+            if(teamTarget[i].getStamina()>0){
+                currentCharacter=i;
+                return teamTarget[i];
+            }
+        }
+        for(int i=0; i<3;i++){
+            if(teamTarget[i].getStamina()>0){
+                currentCharacter=i;
+                return teamTarget[i];
+            }
+        }
+        return null;
+    }
+    
+    private void btnCommonAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCommonAttackMouseClicked
+        RpgCharacter target = getNextAliveTarget(computerTeam,currentCharacter);
+        if(target != null){
+            float damageTaken = combatPlayerCharacters[currentCharacter].commonAttack(playerTeam[currentCharacter], target);
+            showCombatActionMessage(damageTaken, playerTeam[currentCharacter], target, "ataque corpo a corpo");
+            updateTeaInBattle();
+        }else{
+            BattleEnd();
+        }
+        
+        // invoca a função "commonAttack" da classe "Character"
+    }//GEN-LAST:event_btnCommonAttackMouseClicked
+
+    private void btnClassAttackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClassAttackMouseClicked
+        RpgCharacter target = getNextAliveTarget(computerTeam,currentCharacter);
+        if(target != null){
+            float damageTaken = combatPlayerCharacters[currentCharacter].specialAttack(playerTeam[currentCharacter], target);
+            showCombatActionMessage(damageTaken, playerTeam[currentCharacter], target, btnClassAttack.getText());
+            updateTeaInBattle();
+        }else{
+            BattleEnd();
+        }
+        // invoca a função "specialAttack" da classe "Character"
+    }//GEN-LAST:event_btnClassAttackMouseClicked
+
+    private void btnDeflectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeflectMouseClicked
+        // invoca a função "deflect" da classe "Character"
+    }//GEN-LAST:event_btnDeflectMouseClicked
     private void showCombatActionMessage(float damageTaken, RpgCharacter attacker, RpgCharacter defenser, String attackMethod){
         JOptionPane optionPane = new JOptionPane("Your message here!", JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog =  optionPane.createDialog(null, null);//new JDialog();
@@ -1412,6 +1383,24 @@ private void adicionarImagemAoTime(Object iconeObj, int row) {
         timer.start();
         dialog.pack();
         dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+    private void btnBattleRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBattleRunActionPerformed
+        for(int i =0;i<3;i++){
+            playerTeam[i].resetStamina();
+        }
+        currentCharacter=0;
+        miTeamEditorCardActionPerformed(evt); //leva o usuário para a tela de seleção de equipes
+        JOptionPane optionPane = new JOptionPane("você fugiu da batalha :(", JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog =  optionPane.createDialog(null, "");
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btnBattleRunActionPerformed
+    
+    private void BattleEnd(){
+        CardLayout cardlayout = (CardLayout) jPanel1.getLayout();
+        cardlayout.show(jPanel1,"TeamEditorCard");
+        JOptionPane optionPane = new JOptionPane("o jogo acabou", JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog =  optionPane.createDialog(null, "");
         dialog.setVisible(true);
     }
     /**
