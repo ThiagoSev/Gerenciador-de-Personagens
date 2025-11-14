@@ -14,6 +14,8 @@ public class RpgCharacter{
     private int agility;
     private int vitality;
     private int intelligence;
+    
+    private int defenseBonus;
 
     public RpgCharacter(String name, int tempRpgClass, int strength, int agility, int vitality, int intelligence){
         this.name = name;
@@ -51,22 +53,26 @@ public class RpgCharacter{
         Random random = new Random();
         String defenserName = defenserCharacter.getName();
         String attackerName = attackerCharacter.getName();
-        if(defenserCharacter.getDefense() < random.nextInt(6)+1){
-            int damageTaken = (attackerCharacter.getStrength() + 3)*(-1); //dano será sempre negativo
+        int defenseBonus = defenserCharacter.getDefenseBonus();
+        int damageTaken = 0;
+        if(defenserCharacter.getDefense()+defenseBonus < random.nextInt(6)+1){
+            damageTaken = (attackerCharacter.getStrength() + 3)*(-1); //dano será sempre negativo
             defenserCharacter.setStamina(damageTaken);
             System.out.println(attackerName + " deu "+damageTaken+" de dano no "+ defenserName);
-            return damageTaken;
         }else{
             System.out.println(defenserName + " desviou do ataque");
-            return 0;
         }
+        defenserCharacter.setDefenseBonus(10);
+        return damageTaken;
     }
     public int specialAttack(RpgCharacter attackerCharacter, RpgCharacter defenserCharacter){
         return rpgClass.specialAttack(attackerCharacter, defenserCharacter);
     }
-    public int deflect(RpgCharacter attackerCharacter, RpgCharacter defenserCharacter){
-        //decide se o personagem consegue desviar
-        return rpgClass.specialAttack(attackerCharacter, defenserCharacter);
+    public void deflect(){
+        Random random = new Random();
+        int i = random.nextInt(3)+1;
+        this.defenseBonus = i;
+        System.out.println("bonus de defesa: "+this.defenseBonus);
     }
     public String getName() {
         return this.name;
@@ -110,6 +116,12 @@ public class RpgCharacter{
         return this.agility;
     }
     public int getVitality() {
-    return vitality;
-}
+        return this.vitality;
+    }
+    public int getDefenseBonus(){
+        return this.defenseBonus;
+    }
+    public void setDefenseBonus(int bonus){
+        this.defenseBonus = bonus;
+    }
 }

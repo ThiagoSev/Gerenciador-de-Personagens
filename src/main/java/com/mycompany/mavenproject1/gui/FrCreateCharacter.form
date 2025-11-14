@@ -24,6 +24,10 @@
         <Property name="label" type="java.lang.String" value="checkbox1"/>
       </Properties>
     </Component>
+    <Container class="java.awt.ScrollPane" name="scrollPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.ScrollPaneSupportLayout"/>
+    </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -184,7 +188,7 @@
                               <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="123" max="32767" attributes="0"/>
+                      <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -696,101 +700,98 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnCommonAttack" alignment="0" min="-2" pref="134" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="labelEnemy1Name" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="labelEnemy1Icon" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="labelEnemy2Name" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="labelEnemy2Icon" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="labelEnemy3Name" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="labelEnemy3Icon" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="labelEnemy3HP" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="labelEnemy1HP" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="labelEnemy2HP" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Component id="labelChar1Image" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <Component id="labelEnemy1Name" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="labelEnemy1Icon" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="labelEnemy2Name" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="labelEnemy2Icon" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="labelEnemy3Name" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="labelEnemy3Icon" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelEnemy3HP" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelEnemy1HP" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelEnemy2HP" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="labelChar1Image" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btnCommonAttack" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                  <Component id="labelEnemy1Image" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="labelEnemy2Image" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="labelEnemy3Image" min="-2" pref="100" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="labelChar2Image" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="labelChar3Image" min="-2" pref="100" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="labelChar2Image" min="-2" pref="100" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="labelChar3Image" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="1" attributes="0">
-                                                          <Component id="btnClassAttack" min="-2" pref="147" max="-2" attributes="0"/>
-                                                          <Group type="102" attributes="0">
-                                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                                  <Group type="102" alignment="0" attributes="0">
-                                                                      <Component id="labelChar1Name" min="-2" max="-2" attributes="0"/>
-                                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                      <Component id="labelChar1Icon" min="-2" max="-2" attributes="0"/>
-                                                                  </Group>
-                                                                  <Group type="102" alignment="0" attributes="0">
-                                                                      <Component id="labelChar2Name" min="-2" max="-2" attributes="0"/>
-                                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                      <Component id="labelChar2Icon" min="-2" max="-2" attributes="0"/>
-                                                                  </Group>
-                                                                  <Group type="102" alignment="0" attributes="0">
-                                                                      <Component id="labelChar3Name" min="-2" max="-2" attributes="0"/>
-                                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                                      <Component id="labelChar3Icon" min="-2" max="-2" attributes="0"/>
-                                                                  </Group>
-                                                              </Group>
-                                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                                  <Component id="labelChar3HP" min="-2" max="-2" attributes="0"/>
-                                                                  <Component id="labelChar2HP" min="-2" max="-2" attributes="0"/>
-                                                                  <Component id="labelChar1HP" min="-2" max="-2" attributes="0"/>
-                                                              </Group>
-                                                          </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="btnDeflect" min="-2" pref="116" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="labelChar1Name" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="labelChar1Icon" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="labelChar2Name" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="labelChar2Icon" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="labelChar3Name" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                          <Component id="labelChar3Icon" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="labelChar3HP" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="labelChar2HP" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="labelChar1HP" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
-                                          </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                                              <Component id="labelEnemy1Image" min="-2" pref="100" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="labelEnemy2Image" min="-2" pref="100" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="labelEnemy3Image" min="-2" pref="100" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
-                              <Component id="btnBattleRun" min="-2" pref="140" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btnBattleRun" pref="0" max="32767" attributes="0"/>
+                                  <Component id="btnClassAttack" pref="124" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="246" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="244" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -833,7 +834,7 @@
                               <Component id="labelEnemy3HP" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -849,7 +850,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="labelChar1Name" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="labelChar1Icon" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -871,12 +872,15 @@
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnClassAttack" pref="69" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="btnClassAttack" alignment="3" min="-2" pref="69" max="-2" attributes="0"/>
+                              <Component id="btnDeflect" alignment="3" min="-2" pref="69" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="btnCommonAttack" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="btnBattleRun" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -995,6 +999,14 @@
             <Component class="javax.swing.JLabel" name="labelEnemy2Image">
             </Component>
             <Component class="javax.swing.JLabel" name="labelEnemy3Image">
+            </Component>
+            <Component class="javax.swing.JButton" name="btnDeflect">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Desviar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDeflectMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
